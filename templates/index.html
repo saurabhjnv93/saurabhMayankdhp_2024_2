@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#toggleFilters").click(function () {
+          $("#filterOptions").toggle();
+        });
+      });
+
+      $(document).ready(function () {
+        $("#contrastFilters").click(function () {
+          $("#contrastOptions").toggle();
+        });
+      });
+    </script>
+
+    <title>EditPhoto</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src = "../static/script.js"></script>
+
+
+  </head>
+  <body>
+    
+    <div class="img1">
+    
+    <nav class="navbar">
+        <div class="main-nav flex">
+            
+            <div class="com"><span class="span1">Edit</span><span class="span2">Photo</span></div>
+            <div class="nav-links" id="nav-links">
+                <ul class="flex">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/team">Our Team</a></li>
+                </ul> 
+            </div>
+        </div>
+    </nav>
+    
+    
+    <div class="img"></div>
+    <div class="text">
+      <h1>Transform Your Images, Unleash Your Creativity</h1>
+      <p>EditPhoto: Where Every Pixel Tells a Story!</p>
+    </div></div>
+
+    <section class="wave">
+  
+        <div class="job reveal">
+            <span class="stay">Make your images shine,</span>
+            <div class="typing-text">
+                <span> with</span>
+                <span> editing divine!</span>
+            </div></div>
+            <div class="main-div reveal">
+              <div class="head">
+            <p>Transform your image editing experience with EditPhoto, where innovation meets simplicity. Our platform offers a multitude of advanced editing features designed to enhance your photos effortlessly. From precise adjustments to creative filters and everything in between, EditPhoto empowers you to bring your vision to life with stunning results. Say goodbye to ordinary edits and embrace a new level of excellence with EditPhoto.</p>
+            <div class="one">
+            <div class="video reveal">
+                <div class="play-btn" onclick="scrollToSection('editor')">
+                <ion-icon name="play"></ion-icon>
+                </div>
+                </div>
+                <p class="two reveal">Let's Edit Images Scroll Follow</p></div></div>
+                <div class="image reveal"><img src="../static/gramm2.jpeg"></div>
+              </div>
+
+
+    </section>
+    <h1 class="h1 reveal"><span class="span4">Transform photos</span> into works of Art</h1>
+
+    
+    <section id="editor reveal">
+  
+    
+      
+      <div class="h2 reveal">
+        <h2>Image Editor</h2>
+      </div>
+  
+      <div class="input reveal">
+        Choose Image from your divice
+        <form action="/" method="POST" enctype="multipart/form-data">
+          <input type="file" name="image" accept="image/*" required class="file reveal"/><br /><br />
+          <button type="submit" name="operation" value="submit" class="one1 reveal">
+            Upload Image
+          </button>
+        </form>
+      </div>
+
+  <div class="first">
+      <div class="second">
+        {% if img_data %}
+        <h2>Selected Image</h2>
+        <!-- <img src="data:image/png;base64,{{ img_data }}" alt="Processed Image" /> -->
+      
+  
+      <div class="filters">
+        <div class="photo1">
+          <label class="title">Filters</label>
+        <form method="POST" action="/apply_filter" id="filterForm">
+          
+          
+          
+          <div>
+            <label>
+              <input type="submit" name="Operation" value="rotate" class="one2" />
+            </label></div>
+            <div><label>
+              <input type="submit" name="Operation" value="blur" class="one2"  />
+            </label></div>
+          
+          
+            <div><button type="button" id="toggleFilters" class="one2">More Filters</button></div>
+            <div id="filterOptions" style="display: none">
+              <label
+                ><input type="submit" name="Operation" value="sharpen" class="one3"
+              /></label>
+              <label
+                ><input type="submit" name="Operation" value="edge_enhance" class="one3"
+              /></label>
+              <label
+                ><input type="submit" name="Operation" value="smooth" class="one3"
+              /></label>
+              <label
+                ><input type="submit" name="Operation" value="emboss" class="one3"
+              /></label>
+              <label
+                ><input type="submit" name="Operation" value="grayscale" class="one3"
+              /></label>
+              <label
+                ><input type="submit" name="Operation" value="sepia" class="one3"
+              /></label>
+            </div>
+  
+
+            <div><button type="button" id="contrastFilters" class="one2">Contrast</button></div>
+            <div id="contrastOptions" style="display: none">
+            <div><button type="submit" name="Operation" value="increase_contrast" class="one3" >
+              Increase Contrast
+            </button></div>
+          <div><button type="submit" name="Operation" value="decrease_contrast" class="one3" >
+              Decrease Contrast
+            </button></div>
+          </div>
+          <div>
+            <input type="submit" value="Crop Image" class="one2"/></div></div>
+  
+          <div class="photo">
+            <input type="hidden" name="Operation" value="crop" />
+            
+            
+            <canvas id="imageCanvas" width="400" height="400"></canvas><br />
+            <input type="hidden" name="x1" id="x1" value="" />
+            <input type="hidden" name="y1" id="y1" value="" />
+            <input type="hidden" name="x2" id="x2" value="" />
+            <input type="hidden" name="y2" id="y2" value="" />
+          </div>
+        </form>
+      </div> </div></div><br></section>
+  
+      <script>
+        $(document).ready(function () {
+          var canvas = document.getElementById("imageCanvas");
+          var ctx = canvas.getContext("2d");
+          var image = new Image();
+          image.src = "data:image/png;base64,{{ img_data }}"; // Use the base64 image data here
+  
+          image.onload = function () {
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+  
+            var startX, startY, endX, endY;
+            var isDrawing = false;
+  
+            canvas.addEventListener("mousedown", function (event) {
+              isDrawing = true;
+              startX = event.offsetX;
+              startY = event.offsetY;
+            });
+  
+            canvas.addEventListener("mousemove", function (event) {
+              if (isDrawing) {
+                endX = event.offsetX;
+                endY = event.offsetY;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+                ctx.strokeStyle = "red";
+                ctx.strokeRect(
+                  startX,
+                  startY,
+                  event.offsetX - startX,
+                  event.offsetY - startY
+                );
+              }
+            });
+  
+            canvas.addEventListener("mouseup", function (event) {
+              isDrawing = false;
+              $("#x1").val(startX);
+              $("#y1").val(startY);
+              $("#x2").val(endX);
+              $("#y2").val(endY);
+            });
+          };
+        });
+      </script>
+      {% endif %}
+
+
+    
+            <div class="controls">
+                <button class="reset-filter">Reset Filters</button>
+                <div class="row">
+                    <input type="file" class="file-input" accept="image/*" hidden>
+                    <button class="choose-img">Choose Image</button>
+                    <button class="save-img">Save Image</button>
+                </div>
+            </div>
+        </div></div>
+        <div class="subfooter reveal">
+            <footer>
+                <div class="content">
+                  <div class="top">
+                    <div class="logo-details">
+                      <!-- <i class="fab fa-slack"></i> -->
+                      <span class="logo_name">EditPhoto</span>
+                    </div>
+                    <div class="media-icons">
+                      <a href="/"><i class="fab fa-facebook-f"></i></a>
+                      <a href="/"><i class="fab fa-twitter"></i></a>
+                      <a href="/"><i class="fab fa-instagram"></i></a>
+                      <a href="/"><i class="fab fa-linkedin-in"></i></a>
+                      <a href="/"><i class="fab fa-youtube"></i></a>
+                    </div>
+                  </div>
+                  <div class="link-boxes">
+                    <ul class="box">
+                      <li class="link_name">Company</li>
+                      <li><a href="/">Home</a></li>
+                      <li><a href="/">Contact us</a></li>
+                      <li><a href="/">About us</a></li>
+                    </ul>
+                    <ul class="box">
+                      <li class="link_name">Features</li>
+                      <li><a href="/">Cropping</a></li>
+                      <li><a href="/">Rotate</a></li>
+                      <li><a href="/">Blur</a></li>
+                    </ul>
+                    <ul class="box">
+                      <li class="link_name">Account</li>
+                      <li><a href="/">Profile</a></li>
+                      <li><a href="/">My account</a></li>
+                      <li><a href="/">Purchase</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="bottom-details">
+                  <div class="bottom_text">
+                    <span class="copyright_text">Copyright © 2024 <a href="/">EditPhoto</a>All rights reserved</span>
+                    <span class="policy_terms">
+                      <a href="/">Privacy policy</a>
+                      <a href="/">Terms & condition</a>
+                    </span>
+                  </div>
+                </div>
+              </footer>
+            </div>
+
+
+             <script type="text/javascript">
+            window.addEventListener('scroll', reveal);
+        
+            function reveal(){
+              var reveals = document.querySelectorAll('.reveal');
+        
+              for(var i = 0; i < reveals.length; i++){
+        
+                var windowheight = window.innerHeight;
+                var revealtop = reveals[i].getBoundingClientRect().top;
+                var revealpoint = 100;
+        
+                if(revealtop < windowheight - revealpoint){
+                  reveals[i].classList.add('active');
+                }
+                else{
+                  reveals[i].classList.remove('active');
+                }
+              }
+            }
+            </script>
+
+
+    
+
+  </body>
+</html>
